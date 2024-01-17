@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./RouteError";
 import Layout from "./Layout";
-import AddNewPage from './AddNewPage/AddNewPage';
-import Retrievepage from './Retrieve/Retrievepage';
+import AddNewPage from "./AddNewPage/AddNewPage";
+import Retrievepage from "./Retrieve/Retrievepage";
+import ReducerProvider from "../Context/ReducerContext";
 function App() {
   const routes = createBrowserRouter([
     {
@@ -17,16 +18,17 @@ function App() {
         },
         {
           path: "/retrieve",
-          element: <Retrievepage />
-        }
-      ]
-      
-    }
-  ])
+          element: <Retrievepage />,
+        },
+      ],
+    },
+  ]);
   return (
-   <>
-    <RouterProvider router = {routes} />
-   </>
+    <>
+      <ReducerProvider>
+        <RouterProvider router={routes} />
+      </ReducerProvider>
+    </>
   );
 }
 
