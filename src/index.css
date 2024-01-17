@@ -1,13 +1,105 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* <----------Header----------> */
+header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+}
+
+.nav-top {
+  background-color: #4fa8f1;
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+.nav-top a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.nav-tabs {
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: 2px solid #4fa8f1;
+  background-color: #4fa8f1;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background-color: transparent;
+  color: #000;
+}
+
+/* <----------Main-----------> */
+main {
+  flex: 1;
+  padding: 0 2rem;
+  padding-bottom: 2rem;
+  display: flex;
+}
+
+.main-container {
+  flex: 1;
+  width: 100%;
+  border: 1px solid #000;
+}
+
+.page-title {
+  align-items: center;
+  border-bottom: 1px solid grey;
+  border-right: 1px solid grey;
+  display: flex;
+  font-weight: bolder;
+  height: 3rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  width: 20%;
+}
+
+/* <--------------Footer---------------> */
+footer {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  background-color: #000;
+  padding: 1rem;
+}
+
+footer a {
+  color: #fff;
 }
