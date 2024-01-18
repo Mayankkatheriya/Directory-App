@@ -1,4 +1,5 @@
 import React from "react";
+import { nanoid } from 'nanoid'
 
 const Tbody = ({ data, deleteFn }) => {
   return (
@@ -6,7 +7,7 @@ const Tbody = ({ data, deleteFn }) => {
       {data.length > 0 &&
         data.map((item) => {
           return (
-            <tr>
+            <tr key={nanoid()}>
               <td>{item.name}</td>
               <td>{item.dob}</td>
               <td>{item.aadhar}</td>

@@ -9,6 +9,7 @@ import Tfoot from "./Tfoot";
 const AddNewPage = () => {
   const { state, dispatch } = useGlobalState();
 
+  //*Changes in Inputs and show Form button function----------------->
   const onInputChange = (init, action) => {
     switch (action.type) {
       case "clear":
@@ -25,6 +26,8 @@ const AddNewPage = () => {
         };
     }
   };
+
+  //*Initial values for reducer---------------->
   const initInputState = {
     name: "",
     age: "",
@@ -34,7 +37,21 @@ const AddNewPage = () => {
     showForm: false,
   };
 
+  //*UseReducer---------------->
   const [inputs, inputDispatch] = useReducer(onInputChange, initInputState);
+
+  //*Function for calculating Age according to dob-------------------->
+  const calculateAge = (dob) => {
+    let today = new Date();
+    let birthDate = new Date(dob);
+    let calculatedAge = +today.getFullYear() - +birthDate.getFullYear();
+    let m = today.getMonth() - birthDate.getMonth();
+    let d = today.getDate() - birthDate.getDate();
+    if (m < 0 || (m === 0 && d < 0)) {
+      calculatedAge--;
+    }
+    return calculatedAge;
+  };
 
   const addData = () => {
     if (
@@ -61,15 +78,7 @@ const AddNewPage = () => {
     }
 
     //*------Calculating Age----->
-    let today = new Date();
-    let birthDate = new Date(inputs.dob);
-
-    let calculatedAge = +today.getFullYear() - +birthDate.getFullYear()
-    let m = today.getMonth() - birthDate.getMonth()
-    let d = today.getDate() - birthDate.getDate()
-    if (m < 0 || (m === 0 && d < 0)) {
-      calculatedAge--;
-      }
+    let calculatedAge = calculateAge(inputs.dob);
 
     const newData = { ...inputs, id: nanoid(), age: calculatedAge };
 
@@ -88,7 +97,9 @@ const AddNewPage = () => {
 
   const deleteitem = (id) => {
     // Retrieve the existing data from local storage
-    const storedData = JSON.parse(localStorage.getItem("data")).filter((ele) => ele.id !== id);
+    const storedData = JSON.parse(localStorage.getItem("data")).filter(
+      (ele) => ele.id !== id
+    );
     // Update the local storage with the filtered data and set it to our variable
     localStorage.setItem("data", JSON.stringify(storedData));
     dispatch({ type: "delete", payload: id });
