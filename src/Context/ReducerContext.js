@@ -9,6 +9,7 @@ const reducer = (state, action) => {
         ...state,
         personData: [...state.personData, action.payload],
       };
+
     case "delete":
       let newPersonList = [];
       state.personData.forEach((item) => {
@@ -27,10 +28,13 @@ const reducer = (state, action) => {
 };
 
 const ReducerProvider = ({ children }) => {
-  const initialState = {
-    personData: [],
-  };
+  //*------Getting data drom local storage----->
+  const storedData = localStorage.getItem("data");
+  const initialState = storedData
+    ? { personData: JSON.parse(storedData) }
+    : { personData: [] };
   const [state, dispatch] = useReducer(reducer, initialState);
+
   return (
     <ReducerContext.Provider value={{ state, dispatch }}>
       {children}

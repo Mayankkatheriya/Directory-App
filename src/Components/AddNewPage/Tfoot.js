@@ -1,4 +1,5 @@
 import React from "react";
+import Input from "./Input";
 
 const Tfoot = ({inputs, inputDispatch, addData}) => {
   return (
@@ -6,55 +7,19 @@ const Tfoot = ({inputs, inputDispatch, addData}) => {
       {inputs.showForm && (
         <tr>
           <td>
-            <input
-              type="text"
-              value={inputs.name}
-              onChange={(e) =>
-                inputDispatch({ type: "name", payload: e.target.value })
-              }
-            />
+            <Input type = "text" val = {inputs.name} placeholder="Enter Your Name" onChange={(e) => inputDispatch({ type: "name", payload: e.target.value })} />
           </td>
           <td>
-            <input
-              type="date"
-              value={inputs.dob}
-              onChange={(e) =>
-                inputDispatch({ type: "dob", payload: e.target.value })
-              }
-            />
+            <Input type = "date" val = {inputs.dob} onChange={(e) => inputDispatch({ type: "dob", payload: e.target.value })} />
           </td>
           <td>
-            <input
-              type="Number"
-              value={inputs.aadhar}
-              min={10000000000}
-              max={999999999999}
-              onChange={(e) =>
-                inputDispatch({
-                  type: "aadhar",
-                  payload: e.target.value,
-                })
-              }
-            />
+            <Input type = "Number" val = {inputs.aadhar} placeholder="Enter Aadhar No." min = {100000000000} max = {999999999999} onChange={(e) => inputDispatch({type: "aadhar", payload: e.target.value})} />
           </td>
           <td>
-            <input
-              type="Number"
-              min={1000000000}
-              value={inputs.mob}
-              onChange={(e) =>
-                inputDispatch({ type: "mob", payload: e.target.value })
-              }
-            />
+            <Input type = "Number" val = {inputs.mob} placeholder="Enter Mobile No." min = {1000000000} max = {9999999999} onChange={(e) => inputDispatch({ type: "mob", payload: e.target.value })} />
           </td>
           <td>
-            <input
-              type="Number"
-              value={inputs.age}
-              onChange={(e) =>
-                inputDispatch({ type: "age", payload: e.target.value })
-              }
-            />
+            <Input type = "text" val = {inputs.age} placeholder={"Calculate Automatically"} readonly = {true} />
           </td>
           <td>
             <button onClick={addData}>💾</button>

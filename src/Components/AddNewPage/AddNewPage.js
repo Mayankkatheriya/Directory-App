@@ -25,7 +25,7 @@ const AddNewPage = () => {
         };
     }
   };
-  const initState = {
+  const initInputState = {
     name: "",
     age: "",
     dob: "",
@@ -34,12 +34,11 @@ const AddNewPage = () => {
     showForm: false,
   };
 
-  const [inputs, inputDispatch] = useReducer(onInputChange, initState);
+  const [inputs, inputDispatch] = useReducer(onInputChange, initInputState);
 
   const addData = () => {
     if (
       !inputs.name ||
-      !inputs.age ||
       !inputs.dob ||
       inputs.aadhar === "" ||
       inputs.mob === ""
@@ -47,24 +46,51 @@ const AddNewPage = () => {
       alert("Please fill all the fields");
       return;
     }
-    // Checking Aadhar number is valid or not
+    //*------Checking Aadhar number is valid or not----->
     var aadharRegex = /^[0-9]{12}$/;
     if (!aadharRegex.test(inputs.aadhar)) {
       alert("Aadhaar Number should be exactly 12 digits");
       return;
     }
 
-    // Checking mobile number is valid or not
+    //*------Checking mobile number is valid or not----->
     var mobileRegex = /^[0-9]{10}$/;
     if (!mobileRegex.test(inputs.mob)) {
       alert("Mobile Number should be exactly 10 digits");
       return;
     }
-    dispatch({ type: "newAdd", payload: { ...inputs, id: nanoid() } });
-    inputDispatch({ type: "clear", payload: initState });
+
+    //*------Calculating Age----->
+    let today = new Date();
+    let birthDate = new Date(inputs.dob);
+
+    let calculatedAge = +today.getFullYear() - +birthDate.getFullYear()
+    let m = today.getMonth() - birthDate.getMonth()
+    let d = today.getDate() - birthDate.getDate()
+    if (m < 0 || (m === 0 && d < 0)) {
+      calculatedAge--;
+      }
+
+    const newData = { ...inputs, id: nanoid(), age: calculatedAge };
+
+    // Update the global state using dispatch
+    dispatch({ type: "newAdd", payload: newData });
+
+    // Retrieve the existing data from local storage
+    const storedData = JSON.parse(localStorage.getItem("data")) || [];
+
+    // Update the local storage with the new data
+    localStorage.setItem("data", JSON.stringify([...storedData, newData]));
+
+    // Clear the form inputs
+    inputDispatch({ type: "clear", payload: initInputState });
   };
 
   const deleteitem = (id) => {
+    // Retrieve the existing data from local storage
+    const storedData = JSON.parse(localStorage.getItem("data")).filter((ele) => ele.id !== id);
+    // Update the local storage with the filtered data and set it to our variable
+    localStorage.setItem("data", JSON.stringify(storedData));
     dispatch({ type: "delete", payload: id });
   };
 

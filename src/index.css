@@ -80,14 +80,14 @@ main {
 .add-btn {
   margin-top: auto;
   background-color: #4472c4;
-    border: none;
-    border-radius: 2px;
-    color: #fff;
-    width: 10%;
-    padding: .5rem 1rem;
-    margin-bottom: 10px;
-    align-self: flex-end;
-    margin-right: 2%;
+  border: none;
+  border-radius: 2px;
+  color: #fff;
+  width: 80px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 10px;
+  align-self: flex-end;
+  margin-right: 2%;
 }
 
 .page-title {
@@ -104,7 +104,7 @@ main {
 
 .data-container {
   flex: 1;
-  padding: .5rem 3%;
+  padding: 0.5rem 3%;
 }
 
 .table-container {
@@ -126,10 +126,19 @@ tr {
   height: 35px;
 }
 
-td, th {
+td,
+th {
   width: 200px;
 }
 
+.readonlyInput {
+  text-align: center;
+  outline: none;
+}
+.readonlyInput::placeholder {
+  background-color: #706f6f;
+  color: #dbdbdb;
+}
 
 /* <--------------Footer---------------> */
 footer {
